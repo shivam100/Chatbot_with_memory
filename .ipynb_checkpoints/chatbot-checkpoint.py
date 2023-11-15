@@ -6,15 +6,17 @@ from langchain.chains.conversation.prompt import ENTITY_MEMORY_CONVERSATION_TEMP
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
+
 print("Please Enter your OpenAI API KEY" + "\n")
 OPENAI_API_KEY = getpass()
 
+# Creating an instance of the OpenAI language model (llm)
 llm = OpenAI(model_name='text-davinci-003', 
              temperature=0, 
              openai_api_key= OPENAI_API_KEY,
              max_tokens = 256)
 
-
+# Creating a conversation chain with the OpenAI language model
 conversation = ConversationChain(
     llm=llm, 
     verbose=False,
@@ -28,5 +30,6 @@ while True:
     if user_input.lower() == 'exit':
         print("Chatbot: Goodbye! Will See you soon!")
         break
+    # Generating a response from the chatbot based on user input
     bot_response = conversation.predict(input = user_input)
     print("Chatbot:", bot_response)
